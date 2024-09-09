@@ -22,3 +22,4 @@
 ::1 - - [09/Sep/2024:10:41:25 +0000] "POST /couples/login HTTP/1.1" 500 1160 "-" "PostmanRuntime/7.41.2"
 ::1 - - [09/Sep/2024:10:51:58 +0000] "POST /couples/login HTTP/1.1" 500 48 "-" "PostmanRuntime/7.41.2"
 ::1 - - [09/Sep/2024:10:56:41 +0000] "POST /couples/login HTTP/1.1" 200 218 "-" "PostmanRuntime/7.41.2"
+::1 - - [09/Sep/2024:12:14:08 +0000] "POST /couples/login HTTP/1.1" 200 218 "-" "PostmanRuntime/7.41.2"

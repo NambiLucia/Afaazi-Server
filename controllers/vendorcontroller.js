@@ -6,10 +6,10 @@ require('dotenv/config');
 const bcrypt= require('bcrypt');
 
 
-const getCouples = async (req, res) => {
+const getVendors = async (req, res) => {
     try {
-      let couples = await prisma.couple.findMany();
-      res.json(couples);
+      let vendors = await prisma.vendor.findMany();
+      res.json(vendors);
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -23,7 +23,7 @@ const getCouples = async (req, res) => {
         const {username,fullname,email,telephone,password}=req.body;
         const hashedPassword = await bcrypt.hash(password,10)
 
-        const newCouple = await prisma.couple.create({
+        const newVendor = await prisma.vendor.create({
           data:{
             username,
             fullname,
@@ -35,12 +35,12 @@ const getCouples = async (req, res) => {
 
         })
 
-        return res.status(StatusCodes.OK).json({"message":"New couple registered successfully", newCouple})
+        return res.status(StatusCodes.OK).json({"message":"New vendor created successfully", newVendor })
 
       }
       catch(error){
         console.log(error)
-return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occured while registering new couple"})
+return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occured while creating new vendor"})
 
       }
 
@@ -52,24 +52,24 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 const login = async (req,res)=>{
   try{
     const {username,password}=req.body;
-    let couple= await prisma.couple.findUnique({
+    let vendor = await prisma.vendor.findUnique({
       where:{
         username
       }
     });
-    if(couple){
-      const matchPassword =await bcrypt.compare(password,couple.password)
+    if(vendor){
+      const matchPassword =await bcrypt.compare(password,vendor.password)
       if(matchPassword){
         //create token
-        const coupleToken = await jwt.sign(
-          {id:couple.id,username:couple.username},
+        const vendorToken = await jwt.sign(
+          {id:couple.id,username:vendor.username},
           process.env.SECRET_KEY,
           {expiresIn:"1h"}
 
         )
         //send token back as response
         const date =new Date()
-        res.status(StatusCodes.OK).json({message:"Successful Couple login",coupleToken})
+        res.status(StatusCodes.OK).json({message:"Successful vendor login",vendorToken})
         console.log(coupleToken,`Token Generated at:- ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
 
       }
@@ -81,7 +81,7 @@ const login = async (req,res)=>{
     }
 
     else{
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"error":"Couple not found",couple});
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"error":"Vendor not found",vendor});
     }
 
 
@@ -98,7 +98,7 @@ const login = async (req,res)=>{
 
 
   module.exports = {
-    getCouples,
+    getVendors,
     register,
     login
 }
