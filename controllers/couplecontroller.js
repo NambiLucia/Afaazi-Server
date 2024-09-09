@@ -68,7 +68,9 @@ const login = async (req,res)=>{
 
         )
         //send token back as response
-        res.status(StatusCodes.OK).json({coupleToken,"message":"Successful Couple login"})
+        const date =new Date()
+        res.status(StatusCodes.OK).json({message:"Successful Couple login",coupleToken})
+        console.log(coupleToken,`Token Generated at:- ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
 
       }
       else{
@@ -84,10 +86,10 @@ const login = async (req,res)=>{
 
 
   }
-  catch{
+  catch(error){
     return res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .json({ error: error.message });
+    .json({ error:error.message });
 
 
   }

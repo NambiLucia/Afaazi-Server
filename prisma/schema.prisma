@@ -15,7 +15,7 @@ datasource db {
 
 model Couple {
   id        Int      @id @default(autoincrement())
-  username  String
+  username  String @unique
   fullname  String
   email     String   @unique
   telephone String   @default("000-000-0000")
