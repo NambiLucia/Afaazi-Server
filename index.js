@@ -2,6 +2,7 @@ const express =require("express");
 const fs = require('fs')
 const morgan =require('morgan')
 const path =require('path');
+const {couplesRoute} = require("./routes/couplesRoute");
 
 
 const app =express();
@@ -14,6 +15,10 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs', 'reque
  
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }))
+
+
+//middelware to direct endpoint requests to couplesRoute
+app.use("/couples",couplesRoute);
 
 
 
