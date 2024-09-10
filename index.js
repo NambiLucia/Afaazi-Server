@@ -4,6 +4,7 @@ const morgan =require('morgan')
 const path =require('path');
 const {couplesRoute} = require("./routes/couplesRoute");
 const {vendorsRoute} = require("./routes/vendorsRoute");
+const {categoryRoute} = require("./routes/categoryRoute");
 
 
 const app =express();
@@ -21,6 +22,7 @@ app.use(morgan('combined', { stream: accessLogStream }))
 //middelware to direct endpoint requests to couplesRoute
 app.use("/couples",couplesRoute);
 app.use("/vendors",vendorsRoute);
+app.use("/categories",categoryRoute); //check here for bug
 
 
 

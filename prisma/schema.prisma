@@ -46,11 +46,11 @@ model Vendor {
 
 model Category {
   id        Int      @id @default(autoincrement())
+  title     String   @unique
   picture   String
-  subtitle  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  vendor    Vendor   @relation(fields: [vendorId], references: [id])
+  vendor    Vendor?  @relation(fields: [vendorId], references: [id])
   vendorId  Int
   Rating    Rating[]
 }
