@@ -37,8 +37,8 @@ model Vendor {
   password  String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt //automatically update updatedAt
-  couple    Couple     @relation(fields: [coupleId], references: [id])
-  coupleId  Int
+  couple    Couple?    @relation(fields: [coupleId], references: [id])
+  coupleId  Int?
   Category  Category[]
   Booking   Booking[]
   Rating    Rating[]

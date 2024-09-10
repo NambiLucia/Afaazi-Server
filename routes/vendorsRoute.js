@@ -1,7 +1,7 @@
 const express = require("express");
 //deal with requests
 const vendorsRoute = express.Router();
-const {getVendors,register,login}= require("../controllers/couplecontroller");
+const {getVendors,register,login}= require("../controllers/vendorcontroller");
 
 
 //couple requests
