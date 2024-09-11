@@ -3,6 +3,7 @@ const express = require("express");
 const categoryRoute = express.Router();
 const {getCategories,createCategory}= require("../controllers/categorycontroller");
 const { categorySchema } = require("../Utils/joi-schemas");
+const {validateSchema} = require('../Utils/joi-validator');
 
 
 //couple requests
@@ -13,5 +14,5 @@ categoryRoute.post("/",validateSchema(categorySchema),
 
 
 module.exports = {
-    vendorsRoute
+    categoryRoute
 }

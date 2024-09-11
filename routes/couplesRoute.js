@@ -3,6 +3,8 @@ const express = require("express");
 const couplesRoute = express.Router();
 const {getCouples,register,login}= require("../controllers/couplecontroller");
 const { coupleSchema } = require("../Utils/joi-schemas");
+const {validateSchema} = require('../Utils/joi-validator');
+
 
 
 //couple requests

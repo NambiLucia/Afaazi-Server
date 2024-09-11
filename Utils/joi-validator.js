@@ -11,7 +11,6 @@ const validateSchema=(schema)=>{
 }
 
 
-console.log(validateQuote)
 
 
 module.exports={

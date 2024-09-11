@@ -7,7 +7,7 @@ const { StatusCodes } = require("http-status-codes");
 
 const getCategories = async (req, res) => {
   try {
-    let categories = await prisma.vendor.findMany();
+    let categories = await prisma.category.findMany();
     res.json(categories);
   } catch (error) {
     return res
