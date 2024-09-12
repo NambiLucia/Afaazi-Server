@@ -15,7 +15,7 @@ datasource db {
 
 model Couple {
   id        Int      @id @default(autoincrement())
-  username  String @unique
+  username  String   @unique
   fullname  String
   email     String   @unique
   telephone String   @default("000-000-0000")
@@ -30,7 +30,7 @@ model Couple {
 
 model Vendor {
   id        Int        @id @default(autoincrement())
-  username  String @unique
+  username  String     @unique
   fullname  String
   email     String     @unique
   telephone String     @default("000-000-0000")
@@ -56,20 +56,30 @@ model Category {
 }
 
 model Booking {
-  id        Int      @id @default(autoincrement())
-  name      String
+  id              Int       @id @default(autoincrement())
+  username        String    @unique
+  fullname        String
+  email           String    @unique
+  telephone       String    @default("000-000-0000")
+  eventDate       DateTime
+  checkoutDate    DateTime?
+  eventType       String
+  country         String
+  city            String
+  estimatedBudget String
+  additionalInfo  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  couple    Couple   @relation(fields: [coupleId], references: [id])
-  coupleId  Int
+  couple    Couple ? @relation(fields: [coupleId], references: [id])
+  coupleId  Int?
   vendor    Vendor   @relation(fields: [vendorId], references: [id])
   vendorId  Int
 }
 
 model Rating {
   id         Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   couple     Couple   @relation(fields: [coupleId], references: [id])
   coupleId   Int
   vendor     Vendor   @relation(fields: [vendorId], references: [id])

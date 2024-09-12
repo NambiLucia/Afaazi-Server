@@ -53,3 +53,4 @@
 ::1 - - [11/Sep/2024:05:21:39 +0000] "POST /categories HTTP/1.1" 200 289 "-" "PostmanRuntime/7.41.2"
 ::1 - - [11/Sep/2024:05:24:56 +0000] "POST /categories HTTP/1.1" 200 279 "-" "PostmanRuntime/7.41.2"
 ::1 - - [11/Sep/2024:05:25:15 +0000] "GET /categories HTTP/1.1" 200 638 "-" "PostmanRuntime/7.41.2"
+::1 - - [12/Sep/2024:06:43:22 +0000] "GET /bookings HTTP/1.1" 404 147 "-" "PostmanRuntime/7.41.2"
