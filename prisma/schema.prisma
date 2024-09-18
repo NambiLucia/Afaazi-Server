@@ -62,7 +62,7 @@ model Booking {
   email           String    @unique
   telephone       String    @default("000-000-0000")
   eventDate       DateTime
-  checkoutDate    DateTime?
+  //checkoutDate    DateTime?
   eventType       String
   country         String
   city            String

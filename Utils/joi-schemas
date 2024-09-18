@@ -32,7 +32,7 @@ const bookingSchema=Joi.object({
     email: Joi.string().min(3).max(100).required(),
     telephone:Joi.string().min(10).max(10).required(),
     eventDate:Joi.date().required(),
-    checkoutDate:Joi.date().optional(),
+    //checkoutDate:Joi.date().optional(),
     eventType :Joi.string().min(3).max(50).required(),
     country:Joi.string().min(3).max(50).required(),
     city:Joi.string().min(3).max(50).required(),
