@@ -18,12 +18,13 @@ const getBookings = async (req, res) => {
 
   const createBooking =async (req,res)=>{
       try{
-        const {username,fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
+        const {fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
         
+        const eventDateISO = new Date(eventDate).toISOString();
       
         const newBooking = await prisma.booking.create({
           data:{
-            username,fullname,email,telephone,eventDate:new Date("1970-01-01T15:30:00Z"),eventType,country,city,estimatedBudget,additionalInfo,vendorId
+            fullname,email,telephone,eventDate:eventDateISO,eventType,country,city,estimatedBudget,additionalInfo,vendorId
 
           }
 
@@ -44,7 +45,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
   const updateBookingsById = async (req, res) => {
     try {
-      const updatedBooking = await prisma.quote.update({
+      const updatedBooking = await prisma.booking.update({
         where: {
           id: parseInt(req.params.id),
         },
@@ -53,7 +54,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
       if (!updatedBooking) {
         return res.status(404).json({ error: "Booking not found" });
       }
-      return res.status(StatusCodes.OK).json(updatedBooking);
+      return res.status(StatusCodes.OK).json({message:`Booking updated`,updatedBooking});
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -61,22 +62,22 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
     }
   };
   
-  /*const deleteQuotesById = async (req, res) => {
+  const deleteBookingsById = async (req, res) => {
     try {
-      const deletedQuote = await prisma.quote.delete({
+      const deletedBooking = await prisma.booking.delete({
         where: {
-          id: parseInt(req.params.id),//+(req.params.id)
+          id: +(req.params.id),
         },
       });
   
-  if(deletedQuote){
+  if(deletedBooking){
      return res
         .status(StatusCodes.OK)
-        .json({ message: "Quote deleted", deletedQuote });
+        .json({ message: "Booking deleted", deletedBooking });
   
   }
   else{
-    return res.status(404).json({ error: "Quote doesnt exist" });
+    return res.status(404).json({ error: "Sorry,Booking doesnt exist" });
   }
   
   
@@ -87,7 +88,6 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
         .json({ error: error.message });
     }
   };
-*/
 
 
 
@@ -96,4 +96,6 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
   module.exports = {
     getBookings,
     createBooking,
+    updateBookingsById,
+    deleteBookingsById
 }
