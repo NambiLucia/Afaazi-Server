@@ -14,6 +14,34 @@ const getBookings = async (req, res) => {
         .json({ error: error.message });
     }
   };
+  
+  const getBookingsByName = async (req, res) => {
+    try{
+     const name = req.params.username
+    const getBooking = await prisma.booking.findUnique({
+      where:{
+        username: name,
+      }
+    })
+   
+   
+      return res.status(StatusCodes.OK).json({ message: `Bookings By ${name}`,getBooking})
+   
+    }
+  catch(error){
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({error});
+  
+  }
+  };
+  
+
+
+
+
+
+
   //signup
 
   const createBooking =async (req,res)=>{
@@ -95,6 +123,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
   module.exports = {
     getBookings,
+    getBookingsByName,
     createBooking,
     updateBookingsById,
     deleteBookingsById
