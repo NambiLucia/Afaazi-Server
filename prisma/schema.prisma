@@ -33,7 +33,7 @@ model Vendor {
   username  String     @unique
   fullname  String
   email     String     @unique
-  telephone String     @default("000-000-0000")
+  telephone String     //@default("000-000-0000")
   password  String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt //automatically update updatedAt

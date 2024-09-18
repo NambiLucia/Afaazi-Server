@@ -4,8 +4,8 @@ const coupleSchema=Joi.object({
     username:Joi.string().min(3).max(50).required(),
     fullname:Joi.string().min(3).max(100).required(),
     email: Joi.string().min(3).max(100).required(),
-    telephone:Joi.string().min(10).max(10).required(),
-    password:Joi.string().min(10).max(10).required(),
+    telephone:Joi.string().min(10).max(12).required(), //validation failure
+    password:Joi.string().min(3).max(50).required(),
 
 })
 
@@ -13,8 +13,11 @@ const vendorSchema=Joi.object({
     username:Joi.string().min(3).max(50).required(),
     fullname:Joi.string().min(3).max(100).required(),
     email: Joi.string().min(3).max(100).required(),
-    telephone:Joi.string().min(10).max(10).required(),
-    password:Joi.string().min(10).max(10).required(),
+    telephone:Joi.string().min(10).max(12).required(),
+    password:Joi.string().min(3).max(50).required(),
+
+    
+
 
 })
 const categorySchema=Joi.object({
@@ -23,7 +26,21 @@ const categorySchema=Joi.object({
    
 
 })
+const bookingSchema=Joi.object({
+    username:Joi.string().min(3).max(50).required(),
+    fullname:Joi.string().min(3).max(100).required(),
+    email: Joi.string().min(3).max(100).required(),
+    telephone:Joi.string().min(10).max(10).required(),
+    eventDate:Joi.date().required(),
+    checkoutDate:Joi.date().optional(),
+    eventType :Joi.string().min(3).max(50).required(),
+    country:Joi.string().min(3).max(50).required(),
+    city:Joi.string().min(3).max(50).required(),
+    estimatedBudget:Joi.number().integer().required(),
+    additionalInfo :Joi.string().min(3).max(250).required(),
+    vendorId :Joi.number().integer().required()
 
+})
 
 
 
@@ -31,5 +48,6 @@ const categorySchema=Joi.object({
 module.exports={
     coupleSchema,
     vendorSchema,
-    categorySchema
+    categorySchema,
+    bookingSchema
 }

@@ -4,7 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 
 
 
-const getBooking = async (req, res) => {
+const getBookings = async (req, res) => {
     try {
       let bookings = await prisma.booking.findMany();
       res.json(bookings);
@@ -18,12 +18,12 @@ const getBooking = async (req, res) => {
 
   const createBooking =async (req,res)=>{
       try{
-        const {username,fullname,email,telephone,eventdate,checkoutDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
+        const {username,fullname,email,telephone,eventDate,checkoutDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
         
 
         const newBooking = await prisma.booking.create({
           data:{
-            username,fullname,email,telephone,eventdate,checkoutDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId
+            username,fullname,email,telephone,eventDate,checkoutDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId
 
           }
 
@@ -40,7 +40,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
   }
 
- /* const updateBookingsById = async (req, res) => {
+  const updateBookingsById = async (req, res) => {
     try {
       const updatedBooking = await prisma.quote.update({
         where: {
@@ -48,10 +48,10 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
         },
         data: req.body,
       });
-      if (!updatedQuote) {
-        return res.status(404).json({ error: "Quote not found" });
+      if (!updatedBooking) {
+        return res.status(404).json({ error: "Booking not found" });
       }
-      return res.status(StatusCodes.OK).json(updatedQuote);
+      return res.status(StatusCodes.OK).json(updatedBooking);
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -59,7 +59,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
     }
   };
   
-  const deleteQuotesById = async (req, res) => {
+  /*const deleteQuotesById = async (req, res) => {
     try {
       const deletedQuote = await prisma.quote.delete({
         where: {
@@ -92,6 +92,6 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
 
   module.exports = {
-    getBooking,
+    getBookings,
     createBooking,
 }
