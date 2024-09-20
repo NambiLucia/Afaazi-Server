@@ -10,10 +10,11 @@ const validateToken =(req,res,next)=>{
         let token = authHeader.split(" ")[1]
         jwt.verify(token,process.env.SECRET_KEY,(err,couple)=>{
             if(err) {
-                return res.json(err);
+                return res.status(StatusCodes.FORBIDDEN).json({message: 'Failed to authenticate token' });
 
             }
             else{
+                req.coupleId = couple.id;
             next();
             }
 
@@ -22,7 +23,12 @@ const validateToken =(req,res,next)=>{
 
     }
     else{
-        res.status(StatusCodes.NOT_FOUND).json("Authorization header is missing")
+        res.status(StatusCodes.UNAUTHORIZED).json({message:"Authorization header is missing"})
     }
 }
+
+
+
+
+
 module.exports = validateToken;

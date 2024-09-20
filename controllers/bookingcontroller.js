@@ -46,13 +46,14 @@ const getBookings = async (req, res) => {
 
   const createBooking =async (req,res)=>{
       try{
-        const {fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
+        const coupleId = req.coupleId
+        const { username,fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
         
         const eventDateISO = new Date(eventDate).toISOString();
       
         const newBooking = await prisma.booking.create({
           data:{
-            fullname,email,telephone,eventDate:eventDateISO,eventType,country,city,estimatedBudget,additionalInfo,vendorId
+           coupleId,username,fullname,email,telephone,eventDate:eventDateISO,eventType,country,city,estimatedBudget,additionalInfo,vendorId
 
           }
 

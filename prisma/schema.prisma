@@ -70,8 +70,8 @@ model Booking {
   additionalInfo  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  couple    Couple ? @relation(fields: [coupleId], references: [id])
-  coupleId  Int?
+  couple    Couple  @relation(fields: [coupleId], references: [id])
+  coupleId  Int
   vendor    Vendor   @relation(fields: [vendorId], references: [id])
   vendorId  Int
 }
