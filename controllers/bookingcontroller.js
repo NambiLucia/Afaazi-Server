@@ -1,6 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { StatusCodes } = require("http-status-codes");
+const toISODateString =require("../Utils/dateUtils")
+const generateSlug = require("../Utils/slugUtils")
 
 
 
@@ -15,17 +17,17 @@ const getBookings = async (req, res) => {
     }
   };
   
-  const getBookingsByName = async (req, res) => {
+  const getBookingsBySlug = async (req, res) => {
     try{
-     const name = req.params.username
+     const slug = req.params.slug
     const getBooking = await prisma.booking.findUnique({
       where:{
-        username: name,
+        slug:slug
       }
     })
    
    
-      return res.status(StatusCodes.OK).json({ message: `Bookings By ${name}`,getBooking})
+      return res.status(StatusCodes.OK).json({ message: `Bookings By slug ${slug}`,getBooking})
    
     }
   catch(error){
@@ -49,11 +51,12 @@ const getBookings = async (req, res) => {
         const coupleId = req.coupleId
         const { username,fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
         
-        const eventDateISO = new Date(eventDate).toISOString();
+        const eventDateISO = toISODateString(eventDate)
+        const slug = generateSlug(username);
       
         const newBooking = await prisma.booking.create({
           data:{
-           coupleId,username,fullname,email,telephone,eventDate:eventDateISO,eventType,country,city,estimatedBudget,additionalInfo,vendorId
+          username,slug,fullname,email,telephone,eventDate:eventDateISO,eventType,country,city,estimatedBudget,additionalInfo, coupleId,vendorId
 
           }
 
@@ -124,7 +127,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
   module.exports = {
     getBookings,
-    getBookingsByName,
+    getBookingsBySlug,
     createBooking,
     updateBookingsById,
     deleteBookingsById

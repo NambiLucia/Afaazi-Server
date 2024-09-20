@@ -146,3 +146,4 @@
 ::1 - - [18/Sep/2024:08:00:04 +0000] "POST /bookings HTTP/1.1" 200 36 "-" "PostmanRuntime/7.42.0"
 ::1 - - [18/Sep/2024:08:04:34 +0000] "POST /bookings HTTP/1.1" 500 47 "-" "PostmanRuntime/7.42.0"
 ::1 - - [18/Sep/2024:08:59:19 +0000] "GET /bookings/Sandra%20&%20Alex HTTP/1.1" 200 483 "-" "PostmanRuntime/7.42.0"
+::1 - - [20/Sep/2024:06:21:43 +0000] "GET /bookings HTTP/1.1" 200 2 "-" "PostmanRuntime/7.42.0"
