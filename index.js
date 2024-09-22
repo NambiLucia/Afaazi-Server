@@ -2,6 +2,7 @@ const express =require("express");
 const fs = require('fs')
 const morgan =require('morgan')
 const path =require('path');
+var cors = require('cors')
 const {couplesRoute} = require("./routes/couplesRoute");
 const {vendorsRoute} = require("./routes/vendorsRoute");
 const {categoryRoute} = require("./routes/categoryRoute");
@@ -13,6 +14,8 @@ const PORT =5000;
 
 //middeleware
 app.use(express.json());
+app.use(cors());
+
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs', 'request_logs.txt'), { flags: 'a' })
  

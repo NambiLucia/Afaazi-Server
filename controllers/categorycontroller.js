@@ -52,8 +52,30 @@ const createCategory = async (req, res) => {
 };
 
 
+const updateCategoryById = async (req, res) => {
+  try {
+    const updatedCategory = await prisma.category.update({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      data: req.body,
+    });
+    if (!updatedCategory) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+    return res.status(StatusCodes.OK).json({message:`Category updated`,updatedCategory});
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+};
+
+
+
 module.exports = {
 getCategories,
-createCategory
+createCategory,
+updateCategoryById
 
 };
