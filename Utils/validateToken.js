@@ -4,7 +4,7 @@ require('dotenv/config');
 
 const validateToken =(req,res,next)=>{
     //check headers for token
-    const authHeader =req.headers.authorizaion
+    const authHeader =req.headers.authorization
     // validate token using jwt
     if(authHeader){
         let token = authHeader.split(" ")[1]

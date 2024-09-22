@@ -29,19 +29,20 @@ model Couple {
 }
 
 model Vendor {
-  id        Int        @id @default(autoincrement())
-  username  String     @unique
-  fullname  String
-  email     String     @unique
-  telephone String     //@default("000-000-0000")
-  password  String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt //automatically update updatedAt
-  couple    Couple?    @relation(fields: [coupleId], references: [id])
-  coupleId  Int?
-  Category  Category[]
-  Booking   Booking[]
-  Rating    Rating[]
+  id         Int       @id @default(autoincrement())
+  username   String    @unique
+  fullname   String
+  email      String    @unique
+  telephone  String //@default("000-000-0000")
+  password   String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt //automatically update updatedAt
+  couple     Couple?   @relation(fields: [coupleId], references: [id])
+  coupleId   Int?
+  category   Category  @relation(fields: [categoryId], references: [id])
+  Booking    Booking[]
+  Rating     Rating[]
+  categoryId Int
 }
 
 model Category {
@@ -50,17 +51,18 @@ model Category {
   picture   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  vendor    Vendor?  @relation(fields: [vendorId], references: [id])
-  vendorId  Int?
-  Rating    Rating[]
+
+  Rating Rating[]
+  Vendor Vendor[]
 }
 
 model Booking {
-  id              Int       @id @default(autoincrement())
-  username        String    @unique
+  id              Int      @id @default(autoincrement())
+  username        String   @unique
+  slug            String   @unique
   fullname        String
-  email           String    @unique
-  telephone       String    @default("000-000-0000")
+  email           String   @unique
+  telephone       String   @default("000-000-0000")
   eventDate       DateTime
   //checkoutDate    DateTime?
   eventType       String
@@ -68,12 +70,12 @@ model Booking {
   city            String
   estimatedBudget String
   additionalInfo  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  couple    Couple  @relation(fields: [coupleId], references: [id])
-  coupleId  Int
-  vendor    Vendor   @relation(fields: [vendorId], references: [id])
-  vendorId  Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  couple          Couple   @relation(fields: [coupleId], references: [id])
+  coupleId        Int
+  vendor          Vendor   @relation(fields: [vendorId], references: [id])
+  vendorId        Int
 }
 
 model Rating {

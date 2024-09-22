@@ -15,6 +15,7 @@ const vendorSchema=Joi.object({
     email: Joi.string().min(3).max(100).required(),
     telephone:Joi.string().min(10).max(12).required(),
     password:Joi.string().min(3).max(50).required(),
+    category:Joi.string().min(3).max(50).required(),
 
     
 

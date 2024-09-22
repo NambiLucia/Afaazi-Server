@@ -4,6 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 require("dotenv/config");
 const bcrypt = require("bcrypt");
+const { title } = require("process");
 
 const getVendors = async (req, res) => {
   try {
@@ -19,8 +20,18 @@ const getVendors = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { username, fullname, email, telephone, password } = req.body;
+    const { username, fullname, email, telephone, password,category } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+     // Find the category by title
+     const existingCategory = await prisma.category.findUnique({
+      where: { title: category },
+    });
+
+    // If the category doesn't exist, return an error
+    if (!existingCategory) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: "Category does not exist" });
+    }
+
 
     const newVendor = await prisma.vendor.create({
       data: {
@@ -29,6 +40,11 @@ const register = async (req, res) => {
         email,
         telephone,
         password: hashedPassword,
+        category:{
+          connect:{
+            id: existingCategory.id,  // Connect by category ID
+          }
+        }
       },
     });
 
