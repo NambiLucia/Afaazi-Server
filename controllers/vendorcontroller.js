@@ -8,7 +8,11 @@ const { title } = require("process");
 
 const getVendors = async (req, res) => {
   try {
-    let vendors = await prisma.vendor.findMany();
+    let vendors = await prisma.vendor.findMany({
+      include:{
+        category:true
+      }
+    });
     res.json(vendors);
   } catch (error) {
     return res

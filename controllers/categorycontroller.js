@@ -7,7 +7,13 @@ const { StatusCodes } = require("http-status-codes");
 
 const getCategories = async (req, res) => {
   try {
-    let categories = await prisma.category.findMany();
+    let categories = await prisma.category.findMany({
+      include:{
+        Vendor:true
+      }
+
+
+    });
     res.json(categories);
   } catch (error) {
     return res
@@ -56,7 +62,7 @@ const updateCategoryById = async (req, res) => {
   try {
     const updatedCategory = await prisma.category.update({
       where: {
-        id: parseInt(req.params.id),
+        id: +(req.params.id),
       },
       data: req.body,
     });
@@ -72,10 +78,40 @@ const updateCategoryById = async (req, res) => {
 };
 
 
+const deleteCategoryById = async (req, res) => {
+  try {
+    const deletedCategory = await prisma.category.delete({
+      where: {
+        id: +(req.params.id),
+      },
+    });
+
+if(deletedCategory){
+   return res
+      .status(StatusCodes.OK)
+      .json({ message: "Category deleted", deletedCategory });
+
+}
+else{
+  return res.status(404).json({ error: "Sorry,Category doesnt exist" });
+}
+
+
+   
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+};
+
+
 
 module.exports = {
 getCategories,
 createCategory,
-updateCategoryById
+updateCategoryById,
+deleteCategoryById
+
 
 };
