@@ -73,6 +73,7 @@ const login = async (req, res) => {
         username,
       },
     });
+    
     if (vendor) {
       const matchPassword = await bcrypt.compare(password, vendor.password);
       if (matchPassword) {
@@ -94,7 +95,7 @@ const login = async (req, res) => {
       }
     } else {
       return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .status(StatusCodes.NOT_FOUND)
         .json({ error: "Vendor not found", vendor });
     }
   } catch (error) {
@@ -102,7 +103,9 @@ const login = async (req, res) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: error.message });
   }
+ 
 };
+
 
 module.exports = {
   getVendors,

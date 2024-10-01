@@ -9,7 +9,7 @@ const { vendorSchema } = require("../Utils/joi-schemas");
 //couple requests
 vendorsRoute.get("/",getVendors);
 vendorsRoute.post("/register",validateSchema(vendorSchema), register);
-vendorsRoute.post("/login",validateSchema(vendorSchema),login);
+vendorsRoute.post("/login",login);
 
 
 module.exports = {

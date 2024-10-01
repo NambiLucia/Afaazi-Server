@@ -40,11 +40,7 @@ const getBookings = async (req, res) => {
   
 
 
-
-
-
-
-  //signup
+  //Create booking
 
   const createBooking =async (req,res)=>{
       try{
@@ -52,6 +48,9 @@ const getBookings = async (req, res) => {
         const { username,fullname,email,telephone,eventDate,eventType,country,city,estimatedBudget,additionalInfo,vendorId}=req.body;
         
         const eventDateISO = toISODateString(eventDate)
+         if (!eventDateISO) {
+      return res.status(400).json({ message: "Invalid event date format." });
+    }
         const slug = generateSlug(username);
       
         const newBooking = await prisma.booking.create({
