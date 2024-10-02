@@ -10,7 +10,8 @@ const { bookingsRoute } = require("./routes/bookingsRoute");
 
 
 const app =express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT 
+//|| 5000;
 
 //middeleware
 app.use(express.json());
