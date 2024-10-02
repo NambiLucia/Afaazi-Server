@@ -330,3 +330,4 @@
 ::1 - - [01/Oct/2024:08:54:27 +0000] "POST /couples/login HTTP/1.1" 200 229 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
 ::1 - - [01/Oct/2024:08:55:13 +0000] "POST /bookings/create-booking HTTP/1.1" 400 81 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
 ::1 - - [01/Oct/2024:08:57:47 +0000] "POST /bookings/create-booking HTTP/1.1" 400 81 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+::1 - - [01/Oct/2024:18:23:37 +0000] "POST /couples/login HTTP/1.1" 200 229 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
