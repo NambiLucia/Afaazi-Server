@@ -8,7 +8,21 @@ const generateSlug = require("../Utils/slugUtils")
 
 const getBookings = async (req, res) => {
     try {
-      let bookings = await prisma.booking.findMany();
+      let bookings = await prisma.booking.findMany({
+        include:{
+          vendor:{
+            select:{
+              username:true,
+            }
+          }
+        
+        }
+  
+       
+  
+
+
+      });
       res.json(bookings);
     } catch (error) {
       return res
