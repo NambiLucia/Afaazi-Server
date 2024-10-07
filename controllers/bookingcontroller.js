@@ -18,10 +18,6 @@ const getBookings = async (req, res) => {
         
         }
   
-       
-  
-
-
       });
       res.json(bookings);
     } catch (error) {
@@ -29,7 +25,45 @@ const getBookings = async (req, res) => {
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ error: error.message });
     }
+  }; 
+
+  const getBookingsByCoupleId = async (req, res) => {
+    try{
+      const coupleId = parseInt(req.params.coupleId);
+  
+      const bookings = await prisma.booking.findMany({
+        where: {
+          coupleId: coupleId,
+        },
+      });
+
+      const couple = await prisma.couple.findUnique({
+        where: {
+            id: coupleId,
+        },
+        select: {
+            fullname: true, 
+        },
+    });
+   
+      return res.status(StatusCodes.OK).json({ message: `Bookings for couple ID ${coupleId} - ${couple.fullname}`,bookings})
+   
+  
+    }
+  catch(error){
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({message: 'An error occurred while fetching bookings',
+        error: error.message || error});
+  
+  }
   };
+
+
+
+
+
+
   
   const getBookingsBySlug = async (req, res) => {
     try{
@@ -140,6 +174,7 @@ return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"message":"Error occu
 
   module.exports = {
     getBookings,
+    getBookingsByCoupleId,
     getBookingsBySlug,
     createBooking,
     updateBookingsById,
