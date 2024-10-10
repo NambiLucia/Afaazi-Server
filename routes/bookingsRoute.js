@@ -9,7 +9,7 @@ const validateToken = require("../Utils/validateToken");
 
 //couple requests
 bookingsRoute.get("/",getBookings);
-bookingsRoute.get("/couple/:coupleId",getBookingsByCoupleId);
+bookingsRoute.get("/couples/:coupleId",getBookingsByCoupleId);
 bookingsRoute.get("/:slug",getBookingsBySlug);
 bookingsRoute.post("/create-booking",validateSchema(bookingSchema),validateToken,createBooking);
 bookingsRoute.put("/:id",validateSchema(bookingSchema),updateBookingsById);

@@ -28,6 +28,7 @@ const getBookings = async (req, res) => {
   }; 
 
   const getBookingsByCoupleId = async (req, res) => {
+    console.log('Request received for coupleId:', req.params.coupleId); 
     try{
       const coupleId = parseInt(req.params.coupleId);
   
