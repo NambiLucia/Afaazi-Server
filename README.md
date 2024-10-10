@@ -22,29 +22,51 @@ Before running this Rest API, you need to have the following installed on your m
 ## Endpoints
 This Rest API has the following endpoints:
 
-```/couples
-GET: Get all registered couples
-POST: Create a new author
-/authors/:id
-GET: Get a specific author
-PUT: Update a specific author
-DELETE: Delete a specific author
-/quotes
-GET: Get all quotes
-POST: Create a new quote
-/quotes/:id
-GET: Get a specific quote
-PUT: Update a specific quote
-DELETE: Delete a specific quote
-/users
-GET: Get all users
-/users/signup
-POST: Create a new user
-/users/signin
-POST: login user
-/users/:id
-GET: Get a specific user
-PUT: Update a specific user
-DELETE: Delete a specific user
-Render
-https://prisma-express-n397.onrender.com/
+**`/couples`**
+* `GET`: Get all registered couples
+* `/couples/register`
+* `POST`: Register a new couple
+* `/couples/login`
+* `POST`: Login a registered couple
+
+**`/vendors`**
+* `GET`: Get all registered vendors
+* `/vendors/register`
+* `POST`: Register a new vendor
+* `/vendors/login`
+* `POST`: Login a registered vendor
+
+
+**`/categories`**
+* `GET`: Get all vendor categories
+* `/categories`
+* `POST`: Create a new vendor category
+* `/categories/:id`
+* `PUT`: Update a specific vendor category
+* `/categories/:id`
+* `DELETE`: Delete a specific vendor category
+
+
+**`/bookings`**
+* `GET`: Get all bookings
+* `/bookings/:slug`
+* `GET`: Get all bookings by a specific couple
+* `bookings/couples/:id`
+* `GET`: Get all bookings by a specific couple
+* `/bookings/create-booking`
+* `POST`: Create a booking
+* `/bookings/:id`
+* `PUT`: Update a specific booking
+* `/bookings/:id`
+* `DELETE`: Delete a specific booking
+
+
+## Render
+https://afaazi-server.onrender.com
+
+## Contributing
+Feel free to contribute. Create a new branch, make changes, and submit a pull request.
+
+
+## License
+This is part of my final project for the backend bootcamp with Kanzu Code Foundation
