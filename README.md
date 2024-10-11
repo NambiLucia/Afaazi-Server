@@ -8,7 +8,7 @@ Afaazi Rest API is built with Node.js, Express, Prisma ORM, and PostgresQL. It p
 Before running this Rest API, you need to have the following installed on your machine:
 
 * Node.js
-* PostgresQL
+* PostgreSQL
 ## Installation
 1. Clone this repository to your local machine
 2. Navigate to the cloned directory
@@ -16,8 +16,8 @@ Before running this Rest API, you need to have the following installed on your m
 4. Create a .env file in the root directory of the project and set the following environment variables:
 5. DATABASE_URL: URL to your PostgresQL database
 6. PORT: Port number for the server to run on
-7. Run npx prisma migrate dev to apply the database schema to your database
-8. Run npm start to start the server
+7. Run npx prisma migrate dev : to apply the database schema to your database
+8. Run npm start : to start the server
 
 ## Endpoints
 This Rest API has the following endpoints:
