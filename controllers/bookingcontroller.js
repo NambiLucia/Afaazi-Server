@@ -63,63 +63,6 @@ const getBookingsByCoupleId = async (req, res) => {
   }
 };
 
-const getBookingsByVendorId = async (req, res) => {
-  console.log('Request received for vendorId:', req.params.id); 
-  try{
-    const id = parseInt(req.params.id);
-
-    const bookings = await prisma.booking.findMany({
-      where: {
-        id: id,
-      },
-      include:{
-        couple:{
-          select:{
-            fullname:true,
-          },
-        },
-        vendor:{
-          select:{
-            fullname:true
-          }
-        }
-
-      },
-
-
-
-
-
-
-    });
-
- 
-    return res.status(StatusCodes.OK).json({ message: `Bookings for Vendor ID ${id} - ${bookings[0]?.vendor.fullname}`, bookings });
-
-
-  }
-catch(error){
-  return res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .json({message: 'An error occurred while fetching Vendor bookings',
-      error: error.message || error});
-
-}
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -240,7 +183,6 @@ const deleteBookingsById = async (req, res) => {
 module.exports = {
   getBookings,
   getBookingsByCoupleId,
-  getBookingsByVendorId,
   getBookingsBySlug,
   createBooking,
   updateBookingsById,
