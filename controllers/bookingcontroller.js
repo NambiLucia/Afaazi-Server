@@ -27,11 +27,11 @@ const getBookings = async (req, res) => {
 const getBookingsByCoupleId = async (req, res) => {
   console.log("Request received for coupleId:", req.params.id);
   try {
-    const id = parseInt(req.params.id);
+    coupleId = parseInt(req.params.id);
 
     const bookings = await prisma.booking.findMany({
       where: {
-        id: id,
+        coupleId: coupleId,
       },
       include: {
         couple: {
@@ -47,10 +47,16 @@ const getBookingsByCoupleId = async (req, res) => {
       },
     });
 
+    if(bookings.length === 0) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message:`No bookings found for couple ID ${coupleId}`
+      })
+    }
+
     return res
       .status(StatusCodes.OK)
       .json({
-        message: `Bookings for couple ID ${id} - ${bookings[0]?.couple.fullname}`,
+        message: `Bookings for couple ID ${coupleId} - ${bookings[0]?.couple.fullname}`,
         bookings,
       });
   } catch (error) {
