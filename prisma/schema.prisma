@@ -58,10 +58,10 @@ model Category {
 
 model Booking {
   id              Int      @id @default(autoincrement())
-  username        String   @unique
+  username        String   //@unique
   slug            String   @unique
   fullname        String
-  email           String   @unique
+  email           String   //@unique
   telephone       String   @default("000-000-0000")
   eventDate       DateTime
   //checkoutDate    DateTime?
