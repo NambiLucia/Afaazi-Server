@@ -8,7 +8,7 @@ on:
       - main
 
 env:
-  DATABASEURL: postgresql://postgres:admin123@localhost:5432/afaazidb?schema=public
+  DATABASE_URL: postgresql://postgres:admin123@localhost:5432/afaazidb?schema=public
 
 jobs:
   build:
