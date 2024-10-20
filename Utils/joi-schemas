@@ -27,6 +27,9 @@ const categorySchema=Joi.object({
    
 
 })
+
+
+
 const bookingSchema=Joi.object({
     username:Joi.string().min(3).max(50).required(),
     fullname:Joi.string().min(3).max(100).required(),

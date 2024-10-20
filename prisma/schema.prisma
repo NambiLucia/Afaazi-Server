@@ -43,6 +43,7 @@ model Vendor {
   Booking    Booking[]
   Rating     Rating[]
   categoryId Int
+  //Profile    Profile[]
 }
 
 model Category {
@@ -58,10 +59,10 @@ model Category {
 
 model Booking {
   id              Int      @id @default(autoincrement())
-  username        String   //@unique
+  username        String //@unique
   slug            String   @unique
   fullname        String
-  email           String   //@unique
+  email           String //@unique
   telephone       String   @default("000-000-0000")
   eventDate       DateTime
   //checkoutDate    DateTime?
@@ -77,6 +78,16 @@ model Booking {
   vendor          Vendor   @relation(fields: [vendorId], references: [id])
   vendorId        Int
 }
+
+// model Profile {
+//   id          Int    @id @default(autoincrement())
+//   title       String @unique
+//   description String
+//   package     String
+//   picture     String
+//   vendor      Vendor @relation(fields: [vendorId], references: [id])
+//   vendorId    Int
+// }
 
 model Rating {
   id         Int      @id @default(autoincrement())
