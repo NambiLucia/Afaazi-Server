@@ -69,6 +69,60 @@ const getBookingsByCoupleId = async (req, res) => {
   }
 };
 
+const getBookingsByVendorId = async (req, res) => {
+  console.log("Request received for vendorId:", req.params.id);
+  try {
+    vendorId = parseInt(req.params.id);
+
+    const bookings = await prisma.booking.findMany({
+      where: {
+        vendorId: vendorId,
+      },
+      include: {
+        couple: {
+          select: {
+            fullname: true,
+          },
+        },
+        vendor: {
+          select: {
+            fullname: true,
+          },
+        },
+      },
+    });
+
+    if(bookings.length === 0) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message:`No bookings found for vendor ID ${vendorId}`
+      })
+    }
+
+    return res
+      .status(StatusCodes.OK)
+      .json({
+        message: `Bookings for vendor ID ${vendorId} - ${bookings[0]?.vendor.fullname}`,
+        bookings,
+      });
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({
+        message: "An error occurred while fetching bookings",
+        error: error.message || error,
+      });
+  }
+};
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -189,6 +243,7 @@ const deleteBookingsById = async (req, res) => {
 module.exports = {
   getBookings,
   getBookingsByCoupleId,
+  getBookingsByVendorId,
   getBookingsBySlug,
   createBooking,
   updateBookingsById,
